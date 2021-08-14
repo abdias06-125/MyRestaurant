@@ -1,0 +1,82 @@
+<app-navbar>
+</app-navbar>
+
+<br><br><br>
+
+
+
+<div class="container-fluid mt-5 animated fadeIn">
+    <div class="row" style="justify-content: center;">
+        <div class="col-8">
+
+            <form (ngSubmit)='filtro(forma)' #forma="ngForm">
+
+                <div class="form-group" style="width:max-content;">
+                    <label for="exampleFormControlSelect1" style="color: #c5c5c5">Filter by city</label>
+                    <select onchange class="form-control" style="background-color: #00000040; color: #c5c5c5;" id="exampleFormControlSelect1" name="ciudad" [(ngModel)]="ciudadElegida">
+                              <option *ngFor="let ciudad of ciudades">{{ciudad}}</option>
+                            </select>
+                </div>
+
+                <button class="btn btn-outline-info" type="submit">
+                            <i class="fas fa-filter"></i>
+                            Apply Filter </button>
+            </form>
+
+            <hr color="#042227">
+
+            <p class="d-flex justify-content-around mb-2">
+                <button class="btn btn-secondary mr-5" (click)="paginaAnterior()">
+                    <i class="fas fa-arrow-circle-left "></i>
+                </button> Page {{idx}} of {{paginas}}
+
+                <button class="btn btn-secondary ml-5" (click)="paginaSiguiente()">
+                    <i class="fas fa-arrow-circle-right"></i>
+                </button>
+            </p>
+
+
+            <table class="table">
+                <thead class="thead " style="background-color: #26b7d3 !important; color:white">
+                    <tr>
+                        <th style="text-align: center;" scope="col">#</th>
+                        <th style="text-align: center;" scope="col">Picture</th>
+                        <th scope="col">Name</th>
+                        <th style="text-align: center;" scope="col">Rating</th>
+                        <th style="text-align: center;" scope="col">Details</th>
+                    </tr>
+                </thead>
+                <tbody style="color: #c5c5c5">
+                    <tr *ngFor="let restaurant of restaurantes, let i =index">
+                        <th style="vertical-align: middle; text-align: center;" scope="row">{{1+i}}</th>
+                        <td style="vertical-align: middle; text-align: center;">
+                            <img class="img-thumbnail" style="width: 70px; " [src]="restaurant.image_url" alt="">
+                        </td>
+                        <td style="vertical-align: middle;">
+                            {{restaurant.name}}
+                        </td>
+                        <td style="vertical-align: middle; text-align: center;">
+
+                            <i *ngFor="let item of [].constructor(restaurant.price)" class="fas fa-dollar-sign text-success"></i>
+                        </td>
+                        <td style="vertical-align: middle; text-align: center;">
+                            <button class="btn btn-info" (click)="guardarRestaurante(restaurant.id)">
+                                <i class="far fa-eye"></i>
+                            </button>
+                        </td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>
+
+<div *ngIf="br">
+    <br><br>
+    <br>
+
+</div>
+
+<app-footer></app-footer>

@@ -1,0 +1,163 @@
+<app-navbar></app-navbar>
+
+<br>
+<br><br>
+
+<div></div>
+
+<div class="container-fluid animated fadeIn " style="background-image: linear-gradient(rgba(0, 0, 0, 0.5),
+rgba(0, 0, 0, 0.5)), url('https://s3.amazonaws.com/arc-wordpress-client-uploads/infobae-wp/wp-content/uploads/2019/06/25123114/Mauro-Colagreco-Restaurant-Mirazur-1920-1.jpg');">
+
+    <div class="row animated fadeIn">
+
+
+
+        <div class="col mt-3 " style="max-width: 650px">
+            <div class="card text-center mb-3 border-info" style=" max-width: 650px; background-color: #0000009c;">
+                <img [src]="restaurante[14]" class="card-img-top" alt="...">
+                <div class="card-body align-items-center">
+                    <h4 class="card-title align-items-center" style="color: #26b7d3">{{restaurante[1]}}</h4>
+                    <h5 class="card-text align-items-center" style="color: #c5c5c5;">
+                        Price range:
+                    </h5>
+                    <h5 class="card-text align-items-center mt-2">
+                        &nbsp;
+                        <i *ngFor="let item of [].constructor(restaurante[11])" class="fas fa-dollar-sign text-success"> 	&nbsp;	&nbsp; </i>
+                    </h5>
+                    <br>
+                    <p class="card-text"><small class="text-muted">Price ranges vary from 1 - 4.
+                    </small></p>
+
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col mt-3 ">
+
+            <div class="card text-center border-info " style="background-color: #0000009c;">
+                <div class="card-header font-weight-bold" style="color: #c5c5c5;">
+                    Details
+                </div>
+                <div class="card-body">
+                    <h3 class="card-title" style="color:#26b7d3">{{restaurante[1]}}</h3>
+                    <br *ngIf="!mapa">
+                    <p *ngIf="!mapa" class="card-text" style="color: #c5c5c5">We're located at {{restaurante[2]}} in {{restaurante[5]}}, {{restaurante[3]}}, {{restaurante[4]}}, {{restaurante[7]}}. <br> Come and visit us. </p>
+                    <br *ngIf="!mapa">
+                    <div class="row">
+
+
+
+                        <div class="col-md-8">
+                            <button *ngIf="deseaReservar" href="#" class="btn btn-outline-success btn-block" (click)="btnReservar()">Make a reservation</button>
+                            <button *ngIf="!deseaReservar" href="#" class="btn btn-outline-secondary btn-block" (click)="btnReservar()">Cancel reservation</button>
+                        </div>
+
+                        <div class="col-md-4">
+                            <button *ngIf="!mapa" class="btn btn-outline-primary mb-2" (click)="btnMap()">
+                                            <i class="fas fa-map-marked-alt"></i> Map
+                                        </button>
+                            <button *ngIf="mapa" class="btn btn-outline-secondary mt-2 mb-2" (click)="btnMap()">
+                                            <i class="fas fa-map-marked-alt"></i> Map
+                                        </button>
+                        </div>
+                    </div>
+
+
+                    <div *ngIf="!deseaReservar" class="animated fadeIn">
+                        <br>
+                        <hr>
+
+                        <form (ngSubmit)='reservar(forma)' #forma="ngForm" style="color: #c5c5c5">
+
+                            <div class="row">
+
+                                <div class="col form-group d-flex justify-content-around mt-4">
+                                    <label class="d-flex align-items-center">Date:&nbsp;</label>
+                                    <input type="text" placeholder="mm/dd/yyyy" class="form-control text-center" style="background-color: #0000009c;" bsDatepicker name="fecha" [(ngModel)]="reservacion.fecha">
+                                </div>
+
+                                <div class="col form-group d-flex justify-content-around mt-4">
+                                    <label class="d-flex align-items-center">Time:&nbsp;
+                                        <input type="time" theme="dark" style="background-color: #0000009c;" class="form-control text-center text-secondary" (click)="open()" value="{{hora}}" />
+                                        &nbsp;&nbsp;&nbsp;<i class="fas fa-question-circle text-info" (click)="info()"></i>
+                                    </label>
+                                </div>
+
+                            </div>
+
+
+
+
+
+
+
+                            <div class="form-group">
+                                <label class="d-flex align-items-center">How many people?&nbsp;
+                                    <select class="form-control" id="exampleFormControlSelect1" name='personas' style="background-color: #0000009c;" required [(ngModel)]="reservacion.personas">
+                                  <option  *ngFor="let item of [].constructor(20); let i=index">{{1+i}}</option>
+                                  
+                                </select>
+
+                                </label>
+                            </div>
+
+
+
+
+
+                            <button class="btn btn-success m-t-3" style="background-color: #2ca646b8;" type="submit">
+                            Confirm reservation
+                            </button>
+
+                        </form>
+
+
+
+                    </div>
+
+
+                </div>
+            </div>
+
+            <div *ngIf="mapa" class="card  border border-info d-flex justify-content-center mt-2 mb-5 animated fadeInUp" style="background-color: #0000009c;">
+                <div class="card-body">
+                    <h5 class="card-title mb-4 text-center" style="color: #26b7d3">
+                        <i class="fas fa-map-marked-alt"></i> Maps
+                    </h5>
+
+                    <div class=" d-flex justify-content-center">
+                        <google-map width='680px' [zoom] [center]="position" class="border border-info d-flex justify-content-center align-content-center">
+                            <map-marker [position]="position" [label]="label" [title]="tittle"></map-marker>
+                        </google-map>
+                    </div>
+                    <div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    <app-footer></app-footer>
+</div>
+
+
+
+
+<!-- 0: 128275
+1: "The Patio on Guerra"
+2: "116 S 17th St"
+3: "Mcallen"
+4: "TX"
+5: "Corpus Christi / McAllen"
+6: "78501"
+7: "US"
+8: "9566619100x"
+9: 26.203352
+10: -98.238214
+11: 3
+12: "http://www.opentable.com/single.aspx?rid=128275"
+13: "http://mobile.opentable.com/opentable/?restId=128275"
+14: "https://www.opentable.com/img/restimages/128275.jpg" -->

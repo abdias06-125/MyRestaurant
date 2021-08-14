@@ -1,0 +1,64 @@
+<app-navbar></app-navbar>
+
+<br><br><br>
+
+
+<div class="container-fluid mt-5">
+    <div class="row d-flex justify-content-center">
+        <div class="col-8">
+            <table class="table">
+                <thead class="thead " style="background-color: #26b7d3 !important; color:white">
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Picture</th>
+                        <th scope="col">Restaurant Name</th>
+                        <th scope="col">Rating</th>
+                        <th scope="col">Reservation Date</th>
+                        <th scope="col">Table for</th>
+                        <th scope="col">Details</th>
+                        <th scope="col">Delete</th>
+                    </tr>
+                </thead>
+                <tbody style="color: #c5c5c5">
+
+                    <tr *ngFor="let reservacion of reservaciones, let i =index">
+                        <th style="vertical-align: middle;" scope="row">{{i+1}}</th>
+                        <td style="vertical-align: middle;">
+                            <img class="img-thumbnail" style="width: 70px; " [src]="reservacion.fotoRestaurante" alt="">
+                        </td>
+                        <td style="vertical-align: middle;">
+                            {{reservacion.nombreRestaurante}}
+                        </td>
+                        <td style="vertical-align: middle; text-align: center;">
+
+                            <i *ngFor="let item of [].constructor(reservacion.priceRestaurante)" class="fas fa-dollar-sign text-success"></i>
+                        </td>
+                        <td style="vertical-align: middle;">
+                            {{reservacion.fecha | date}} - {{reservacion.hora}}
+                        </td>
+                        <td style="vertical-align: middle;">
+                            {{reservacion.personas}} people
+                        </td>
+                        <td style="vertical-align: middle; text-align: center;">
+                            <button class="btn btn-info" (click)="verDetalles(reservacion.id,reservacion.idRestaurante)">
+                                <i class="far fa-eye"></i>
+                            </button>
+                        </td>
+                        <td style="vertical-align: middle; text-align: center;">
+                            <button class="btn btn-danger" (click)="borrar(reservacion,i)">
+                                <i class="fa fa-trash"></i>
+                            </button>
+                        </td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="br">
+    <br><br><br><br><br><br>
+</div>
+
+<app-footer></app-footer>

@@ -1,0 +1,24 @@
+<nav class="navbar navbar-expand-lg fixed-top navbar-dark" style="background-color: #0d5a68;">
+    <img src="/assets/img/fooddome_118034.ico" style="width: 55px;" alt="">
+    <label class=" text-white ml-2 mr-5" style="font-family: sunniland; font-size: 23px;">ReserveNow</label>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item" routerLinkActive='active'>
+                <a class="nav-link" [routerLink]="['/home']" routerLinkActive="active">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item" routerLinkActive='active'>
+                <a class="nav-link" [routerLink]="['/restaurantes']" routerLinkActive="active">Restaurants <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" routerLinkActive='active' [routerLink]="['/reservaciones']">Reservations</a>
+            </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0">
+            <button class="btn btn-danger my-2 my-sm-0" (click)="salir()">Logout</button>
+        </form>
+    </div>
+</nav>

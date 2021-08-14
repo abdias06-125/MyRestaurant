@@ -1,0 +1,11 @@
+/* .shadow {
+    width: 300px;
+    border: 15px solid green;
+    padding: 50px;
+    margin: 20px;
+    box-shadow: 0 0 0 1px red;
+} */
+
+html {
+    background-color: #021417 !important;
+}
